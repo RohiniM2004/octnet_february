@@ -1,51 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adventure Awaits</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    li:last-child {
+        border-bottom: none;
+    }
+    .delete {
+        float: right;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Adventure Awaits</h1>
-    <nav>
-      <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#destinations">Destinations</a></li>
-        <li><a href="#gear">Gear</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="hero">
-    <div class="hero-content">
-      <h2>Discover the thrill of adventure</h2>
-      <p>Explore breathtaking landscapes and embark on unforgettable journeys.</p>
-      <a href="#explore" class="btn">Explore Now</a>
-    </div>
-  </section>
-
-  <section id="features">
-    <h2>Our Features</h2>
-    <div class="feature">
-      <img src="avd.image.webp" alt="Mountain Icon">
-      <h3>Scenic Trails</h3>
-      <p>Find the perfect trail for your next hike, surrounded by stunning natural beauty.</p>
-    </div>
-    <div class="feature">
-      <img src="compass-icon.png" alt="Compass Icon">
-      <h3>Expert Guidance</h3>
-      <p>Get expert advice and guidance from seasoned adventurers to make the most of your journey.</p>
-    </div>
-    <!-- Add more features as needed -->
-  </section>
-
-  <!-- More sections for destinations, gear, and contact -->
-
-  <footer>
-    <p>&copy; 2024 Adventure Awaits. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+  <div class="container">
+      <h1>Todo List</h1>
+      <input type="text" id="taskInput" placeholder="Enter new task">
+      <ul id="taskList"></ul>
+  </div>
+  <script>
+      // Get references to HTML elements
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+  
+      // Function to add a new task
+      function addTask() {
+          const taskText = taskInput.value.trim();
+          if (taskText !== '') {
+              const li = document.createElement('li');
+              li.textContent = taskText;
+              const deleteBtn = document.createElement('span');
+              deleteBtn.textContent = '❌';
+              deleteBtn.classList.add('delete');
+              deleteBtn.addEventListener('click', function() {
+                  li.remove();
+              });
+              li.appendChild(deleteBtn);
+              taskList.appendChild(li);
+              taskInput.value = '';
+          }
+      }
+  
+      // Event listener for adding a new task when Enter key is pressed
+      taskInput.addEventListener('keypress', function(event) {
+          if (event.key === 'Enter') {
+              addTask();
+          }
+      });
+  </script>
+  </body>
+  </html>
+  
